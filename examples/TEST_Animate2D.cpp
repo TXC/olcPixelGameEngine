@@ -45,15 +45,15 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019, 2020, 2021, 2022
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019, 2020, 2021, 2022
 
 */
 
 
 #define OLC_PGE_APPLICATION
-#include "olcPixelGameEngine.h"
+#include "olcPixelGameEngine.hpp"
 
-#include "utilities/olcUTIL_Animate2D.h"
+#include "utilities/olcUTIL_Animate2D.hpp"
 
 class TEST_Animate2D : public olc::PixelGameEngine
 {
@@ -68,7 +68,7 @@ public:
 	// while the animator chooses the frames based upon state and time
 	enum class DudeState: uint8_t
 	{
-		WALK_N, WALK_S, WALK_E, WALK_W, IDLE_STAND,	LAUGH, CHEER, YES, NO
+		WALK_N, WALK_S, WALK_E, WALK_W, IDLE_STAND,	LAUGH, CHEER, PGE_YES, PGE_NO
 	};
 
 	// !! - IMPORTANT - !!
@@ -173,8 +173,8 @@ public:
 		animDude.AddState(DudeState::WALK_E, anim_fs_walk_e);
 		animDude.AddState(DudeState::WALK_N, anim_fs_walk_n);
 		animDude.AddState(DudeState::IDLE_STAND, anim_fs_idle);
-		animDude.AddState(DudeState::YES, anim_fs_yes);
-		animDude.AddState(DudeState::NO, anim_fs_no);
+		animDude.AddState(DudeState::PGE_YES, anim_fs_yes);
+		animDude.AddState(DudeState::PGE_NO, anim_fs_no);
 		animDude.AddState(DudeState::LAUGH, anim_fs_laugh);
 		animDude.AddState(DudeState::CHEER, anim_fs_cheer);
 		
@@ -222,8 +222,8 @@ public:
 				if (nAction == 2) dude.UserState = DudeState::WALK_N;
 				if (nAction == 3) dude.UserState = DudeState::WALK_E;
 				if (nAction == 4) dude.UserState = DudeState::WALK_W;
-				if (nAction == 5) dude.UserState = DudeState::YES;
-				if (nAction == 6) dude.UserState = DudeState::NO;
+				if (nAction == 5) dude.UserState = DudeState::PGE_YES;
+				if (nAction == 6) dude.UserState = DudeState::PGE_NO;
 				if (nAction == 7) dude.UserState = DudeState::LAUGH;
 				if (nAction == 8) dude.UserState = DudeState::CHEER;
 

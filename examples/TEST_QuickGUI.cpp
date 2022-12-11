@@ -45,16 +45,16 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019, 2020, 2021, 2022
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019, 2020, 2021, 2022
 
 */
 
 #define OLC_PGE_APPLICATION
-#include "olcPixelGameEngine.h"
+#include "olcPixelGameEngine.hpp"
 
 // PGEX Require the presence of olc::PixelGameEngine
 #define OLC_PGEX_QUICKGUI
-#include "extensions/olcPGEX_QuickGUI.h"
+#include "extensions/olcPGEX_QuickGUI.hpp"
 
 
 class olcDemo_QuickGUI : public olc::PixelGameEngine

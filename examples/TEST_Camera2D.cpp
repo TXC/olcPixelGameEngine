@@ -45,17 +45,17 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019, 2020, 2021, 2022
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019, 2020, 2021, 2022
 
 */
 
 #define OLC_PGE_APPLICATION
-#include "olcPixelGameEngine.h"
+#include "olcPixelGameEngine.hpp"
 
 #define OLC_PGEX_TRANSFORMEDVIEW
-#include "extensions/olcPGEX_TransformedView.h"
+#include "extensions/olcPGEX_TransformedView.hpp"
 
-#include "utilities/olcUTIL_Camera2D.h"
+#include "utilities/olcUTIL_Camera2D.hpp"
 
 /*
 	To demonstrate the camera, we need a world. In this case its a simle tile

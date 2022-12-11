@@ -1,0 +1,18 @@
+cmake_policy (PUSH)
+cmake_policy (SET CMP0057 NEW)
+
+if (CMAKE_VERSION VERSION_LESS 3.3)
+  message (FATAL_ERROR "Modules.cmake requires the consumer "
+    "to use CMake 3.3 (or newer)")
+endif (CMAKE_VERSION VERSION_LESS 3.3)
+
+set (PixelGameEngine_MODULE_PATH "@CMAKE_INSTALL_LIBDIR@")
+list (APPEND CMAKE_MODULE_PATH ${PixelGameEngine_MODULE_PATH})
+
+if (NOT PixelGameEngine_MODULE_PATH IN_LIST CMAKE_MODULE_PATH)
+  message (FATAL_ERROR "Cannot add '${PixelGameEngine_MODULE_PATH}' to "
+    "CMAKE_MODULE_PATH. This will cause Config.cmake to fail at "
+    "locating required find modules. Make sure CMAKE_MODULE_PATH is not a cache variable.")
+endif (NOT PixelGameEngine_MODULE_PATH IN_LIST CMAKE_MODULE_PATH)
+
+cmake_policy (POP)

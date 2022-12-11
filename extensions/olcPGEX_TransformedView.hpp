@@ -59,7 +59,7 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019, 2020, 2021, 2022
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019, 2020, 2021, 2022
 
 	Revisions:
 	1.00:	Initial Release
@@ -80,7 +80,7 @@
 #ifndef OLC_PGEX_TRANSFORMEDVIEW_H
 #define OLC_PGEX_TRANSFORMEDVIEW_H
 
-#include "olcPixelGameEngine.h"
+#include "olcPixelGameEngine.hpp"
 
 
 

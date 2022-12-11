@@ -4355,7 +4355,7 @@ namespace olc
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		}
 
-		void SetDecalMode(const olc::DecalMode& mode)
+		void SetDecalMode(const olc::DecalMode& mode) override
 		{
 			if (mode != nDecalMode)
 			{
@@ -5985,7 +5985,18 @@ namespace olc {
 			{
 				if (vWindowSize.x > glutGet(GLUT_SCREEN_WIDTH) || vWindowSize.y > glutGet(GLUT_SCREEN_HEIGHT))
 				{
-					perror("ERROR: The specified window dimensions do not fit on your screen\n");
+                    char errorMessage[250];
+                    snprintf(
+                        errorMessage, 250,
+                        "ERROR: The specified window dimensions do not fit on your screen\n(%d > %d || %d > %d)\n",
+                        vWindowSize.y,
+                        glutGet(GLUT_SCREEN_HEIGHT),
+                        vWindowSize.x,
+                        glutGet(GLUT_SCREEN_WIDTH)
+                    );
+                    
+                    //perror("ERROR: The specified window dimensions do not fit on your screen\n");
+                    perror(errorMessage);
 					return olc::FAIL;
 				}
 				glutReshapeWindow(vWindowSize.x, vWindowSize.y - 1);

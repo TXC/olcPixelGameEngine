@@ -51,7 +51,7 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019, 2020, 2021
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019, 2020, 2021
 
 */
 
@@ -324,7 +324,7 @@ namespace olc
 				{
 					// Connection is Server -> Client, construct random data for the client
 					// to transform and send back for validation
-					m_nHandshakeOut = uint64_t(std::chrono::system_clock::now().time_since_epoch().count());
+					m_nHandshakeOut = std::uint64_t(std::chrono::system_clock::now().time_since_epoch().count());
 
 					// Pre-calculate the result for checking when the client responds
 					m_nHandshakeCheck = scramble(m_nHandshakeOut);
@@ -575,9 +575,9 @@ namespace olc
 			}
 
 			// "Encrypt" data
-			uint64_t scramble(uint64_t nInput)
+            std::uint64_t scramble(std::uint64_t nInput)
 			{
-				uint64_t out = nInput ^ 0xDEADBEEFC0DECAFE;
+                std::uint64_t out = nInput ^ 0xDEADBEEFC0DECAFE;
 				out = (out & 0xF0F0F0F0F0F0F0) >> 4 | (out & 0x0F0F0F0F0F0F0F) << 4;
 				return out ^ 0xC0DEFACE12345678;
 			}
@@ -585,7 +585,7 @@ namespace olc
 			// ASYNC - Used by both client and server to write validation packet
 			void WriteValidation()
 			{
-				asio::async_write(m_socket, asio::buffer(&m_nHandshakeOut, sizeof(uint64_t)),
+				asio::async_write(m_socket, asio::buffer(&m_nHandshakeOut, sizeof(std::uint64_t)),
 					[this](std::error_code ec, std::size_t length)
 					{
 						if (!ec)
@@ -604,7 +604,7 @@ namespace olc
 
 			void ReadValidation(olc::net::server_interface<T>* server = nullptr)
 			{
-				asio::async_read(m_socket, asio::buffer(&m_nHandshakeIn, sizeof(uint64_t)),
+				asio::async_read(m_socket, asio::buffer(&m_nHandshakeIn, sizeof(std::uint64_t)),
 					[this, server](std::error_code ec, std::size_t length)
 					{
 						if (!ec)
@@ -686,9 +686,9 @@ namespace olc
 			owner m_nOwnerType = owner::server;
 
 			// Handshake Validation			
-			uint64_t m_nHandshakeOut = 0;
-			uint64_t m_nHandshakeIn = 0;
-			uint64_t m_nHandshakeCheck = 0;
+            std::uint64_t m_nHandshakeOut = 0;
+            std::uint64_t m_nHandshakeIn = 0;
+            std::uint64_t m_nHandshakeCheck = 0;
 
 
 			bool m_bValidHandshake = false;

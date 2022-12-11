@@ -48,7 +48,7 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019, 2020, 2021, 2022
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019, 2020, 2021, 2022
 
 
 	Changes
@@ -73,8 +73,8 @@
 
 #pragma once
 
-#include "olcPixelGameEngine.h"
-#include "olcUTIL_Geometry2D.h"
+#include "olcPixelGameEngine.hpp"
+#include "olcUTIL_Geometry2D.hpp"
 
 
 

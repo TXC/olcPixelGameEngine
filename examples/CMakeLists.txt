@@ -1,0 +1,119 @@
+get_filename_component(PARENT_DIR ../ ABSOLUTE)
+
+ADD_EXECUTABLE(olcExampleProgram)
+#ADD_EXECUTABLE(Animate2D) # Missing Assets
+ADD_EXECUTABLE(Camera2D)
+ADD_EXECUTABLE(QuickGUI)
+
+SET(EXAMPLES_EXECUTABLES)
+IF(TARGET olcExampleProgram)
+  LIST(APPEND EXAMPLES_EXECUTABLES ${olcExampleProgram})
+ENDIF()
+IF(TARGET Animate2D)
+  LIST(APPEND EXAMPLES_EXECUTABLES ${Animate2D})
+ENDIF()
+IF(TARGET Camera2D)
+  LIST(APPEND EXAMPLES_EXECUTABLES ${Camera2D})
+ENDIF()
+IF(TARGET QuickGUI)
+  LIST(APPEND EXAMPLES_EXECUTABLES ${QuickGUI})
+ENDIF()
+
+SET_TARGET_PROPERTIES(${EXAMPLES_EXECUTABLES} PROPERTIES VERSION  ${${PROJECT_NAME}_VERSION}
+                                                 LINKER_LANGUAGE  ${LINKER_LANGUAGE}
+                                              CMAKE_CXX_STANDARD  ${CMAKE_CXX_STANDARD}
+                                     CMAKE_CXX_STANDARD_REQUIRED  ${CMAKE_CXX_STANDARD_REQUIRED}
+                                            CMAKE_CXX_EXTENSIONS  ${CMAKE_CXX_EXTENSIONS}
+                                     THREADS_PREFER_PTHREAD_FLAD  ${THREADS_PREFER_PTHREAD_FLAD}
+)
+
+
+#region Thirdparty Libraries
+
+SET(PGE_LIB)  # Link against
+SET(PGE_INCLUDE_DIR)   # Include Directories
+
+# Threads
+FIND_PACKAGE(Threads REQUIRED)
+FIND_PACKAGE(OpenGL REQUIRED)
+
+LIST(APPEND PGE_LIB Threads::Threads ${LIBRARY_TARGET_NAME})
+
+# OpenGL
+if (LINUX OR WIN32)
+  LIST(APPEND PGE_LIB
+    OpenGL::OpenGL
+    OpenGL::GL
+  #  OpenGL::GLU
+    OpenGL::GLX
+  #  OpenGL::EGL
+  )
+endif(LINUX OR WIN32)
+if (APPLE)
+  LIST(APPEND PGE_LIB ${OPENGL_LIBRARIES})
+endif(APPLE)
+
+if (LINUX OR APPLE)
+  # X11
+  FIND_PACKAGE(X11 REQUIRED)
+  # PNG
+  FIND_PACKAGE(PNG REQUIRED)
+  # X11
+  if(X11_FOUND)
+    LIST(APPEND PGE_LIB ${X11_LIBRARIES})
+  endif(X11_FOUND)
+
+  # PNG
+  LIST(APPEND PGE_INCLUDE_DIR ${PNG_INCLUDE_DIRS})
+  LIST(APPEND PGE_LIB PNG::PNG)
+endif()
+
+if (APPLE)
+  # Carbon
+  FIND_LIBRARY(CARBON_LIBRARY Carbon REQUIRED)
+  # GLUT (OpenGL Utilities)
+  FIND_PACKAGE(GLUT REQUIRED)
+
+  LIST(APPEND PGE_LIB GLUT::GLUT)
+endif(APPLE)
+
+if(WIN32)
+  # Win32 SDK
+  #INCLUDE_DIRECTORIES(${WinSDK})
+  LIST(APPEND PGE_INCLUDE_DIR ${WinSDK})
+endif(WIN32)
+
+LIST(REMOVE_DUPLICATES PGE_INCLUDE_DIR)
+#endregion Thirdparty Libraries
+
+INCLUDE_DIRECTORIES(${LIBRARY_TARGET_NAME_UTILS} ${PGE_SOURCE_DIR} ${PGE_INCLUDE_DIR})
+LINK_LIBRARIES(${PGE_LIB})
+
+IF(TARGET olcExampleProgram)
+  TARGET_SOURCES(${olcExampleProgram} PRIVATE
+    ${PGE_SOURCE_DIR}/examples/olcExampleProgram.cpp
+  )
+ENDIF()
+
+IF(TARGET Animate2D)
+  TARGET_SOURCES(${Animate2D} PRIVATE
+    ${PGE_SOURCE_DIR}/examples/TEST_Animate2D.cpp
+    ${PGE_SOURCE_DIR}/utilities/olcUTIL_Animate2D.hpp
+  )
+ENDIF()
+
+IF(TARGET Camera2D)
+  TARGET_SOURCES(${Camera2D} PRIVATE 
+    ${PGE_SOURCE_DIR}/examples/TEST_Camera2D.cpp
+    ${PGE_SOURCE_DIR}/utilities/olcUTIL_Camera2D.hpp
+    ${PGE_SOURCE_DIR}/extensions/olcPGEX_TransformedView.hpp
+  )
+ENDIF()
+
+IF(TARGET QuickGUI)
+  TARGET_SOURCES(${QuickGUI} PRIVATE
+    ${PGE_SOURCE_DIR}/examples/TEST_QuickGUI.cpp
+    ${PGE_SOURCE_DIR}/extensions/olcPGEX_QuickGUI.hpp
+  )
+ENDIF()
+

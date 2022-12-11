@@ -56,7 +56,7 @@
 
 	Author
 	~~~~~~
-	David Barr, aka javidx9, ©OneLoneCoder 2019, 2020, 2021, 2022
+	David Barr, aka javidx9, ï¿½OneLoneCoder 2019, 2020, 2021, 2022
 
 	Changes
 	~~~~~~~
@@ -74,7 +74,7 @@
 #ifndef OLC_PGEX_QUICKGUI_H
 #define OLC_PGEX_QUICKGUI_H
 
-#include "olcPixelGameEngine.h"
+#include "olcPixelGameEngine.hpp"
 
 
 namespace olc::QuickGUI
